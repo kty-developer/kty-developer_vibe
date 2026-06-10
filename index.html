@@ -42,7 +42,6 @@
         .screen { display: none; }
         .screen.active { display: block; }
 
-        /* 타이포그래피 및 공통 구성 */
         h1, h2, h3 { margin-top: 0; font-weight: 700; }
         p { color: var(--text-muted); }
         
@@ -98,7 +97,7 @@
         }
         .choice-btn:hover { border-color: var(--primary); background-color: var(--primary-light); color: var(--primary); }
 
-        /* 결과 화면 (전문 리포트 스타일) */
+        /* 결과 화면 */
         .result-header { text-align: center; padding-bottom: 30px; border-bottom: 1px solid var(--border); }
         .res-character { font-size: 5rem; margin-bottom: 10px; }
         .res-type { font-size: 3rem; font-weight: 900; color: var(--primary); letter-spacing: 2px; margin: 0; line-height: 1; }
@@ -122,131 +121,4 @@
         }
         .section-card ul { padding-left: 20px; margin: 0; }
         .section-card li { margin-bottom: 10px; color: var(--text-muted); font-size: 0.98rem; }
-        .section-card p { margin: 0; font-size: 0.98rem; }
-
-        .chemistry-box {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        .chem-card {
-            padding: 16px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: 600;
-        }
-        .chem-good { background: #E6F4EA; color: #137333; }
-        .chem-bad { background: #FCE8E6; color: #C5221F; }
-    </style>
-</head>
-<body>
-
-    <div class="app-container">
-        <div id="start-screen" class="screen active welcome-screen">
-            <span class="badge">PROFESSIONAL REPORT v2.0</span>
-            <h1>정밀 성격유형 검사</h1>
-            <p>32개의 표준화 핵심 문항을 통해 당신의 심리 역동과 <br>성격적 강점 및 보완점을 입체적으로 분석합니다.</p>
-            <div class="main-illust">🧠🔬📊</div>
-            <button class="btn" onclick="startTest()">정식 정밀 검사 시작</button>
-        </div>
-
-        <div id="question-screen" class="screen">
-            <div class="progress-header">
-                <span id="progress-text">Question 1/32</span>
-                <span id="progress-percent">0%</span>
-            </div>
-            <div class="progress-bar-wrapper">
-                <div id="progress-bar" class="progress-bar-fill"></div>
-            </div>
-            <div id="question-text" class="question-box">질문 문항 로딩 중...</div>
-            <button class="choice-btn" id="btn-a" onclick="submitAnswer('A')">선택지 A</button>
-            <button class="choice-btn" id="btn-b" onclick="submitAnswer('B')">선택지 B</button>
-        </div>
-
-        <div id="result-screen" class="screen">
-            <div class="result-header">
-                <div id="res-character" class="res-character">🧬</div>
-                <h2 id="res-type" class="res-type">TYPE</h2>
-                <div id="res-title" class="res-title">성격 별칭</div>
-            </div>
-
-            <div class="report-section">
-                <div class="section-card">
-                    <h3>🔍 성격 핵심 역동 및 특징</h3>
-                    <p id="res-desc">정밀 진단 결과를 분석 중입니다.</p>
-                </div>
-
-                <div class="section-card">
-                    <h3>🎯 주된 강점 (Strengths)</h3>
-                    <ul id="res-pros"></ul>
-                </div>
-
-                <div class="section-card">
-                    <h3>⚠️ 잠재적 약점 (Weaknesses)</h3>
-                    <ul id="res-cons"></ul>
-                </div>
-
-                <div class="section-card">
-                    <h3>💡 향후 자기개발 및 보완할 점 (Growth)</h3>
-                    <ul id="res-growth"></ul>
-                </div>
-
-                <div class="section-card">
-                    <h3>🤝 궁합 및 사회적 역학 관계</h3>
-                    <div class="chemistry-box">
-                        <div class="chem-card chem-good">최고의 시너지: <span id="res-chem-good">-</span></div>
-                        <div class="chem-card chem-bad">충돌 방지 요망: <span id="res-chem-bad">-</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn" style="margin-top: 10px;" onclick="resetTest()">검사 다시 받기</button>
-        </div>
-    </div>
-
-    <script>
-        // 32가지 고도화된 정밀 질문 구조 (지표별 각 8문항 점수 누적제)
-        const questions = [
-            { type: "EI", q: "중요한 프로젝트를 마친 후, 당신이 피로를 해소하는 선호 방식은?", a: "동료나 지인들과 가벼운 술자리나 대화로 회포를 푼다.", b: "외부 자극을 차단하고 혼자 조용히 휴식을 취한다." },
-            { type: "EI", q: "회의나 토론 세션에서 당신은 주로 어떤 포지션을 취합니까?", a: "생각이 떠오르는 즉시 적극적으로 발언하며 흐름을 주도한다.", b: "다른 사람들의 의견을 충분히 경청한 뒤 최종 요약/정리한다." },
-            { type: "EI", q: "모르는 이들이 다수 참여하는 네트워킹 파티에 참석했을 때 당신은?", a: "처음 보는 사람들에게도 쉽게 다가가 자연스럽게 대화를 시작한다.", b: "아는 사람 곁에 머물거나, 상대가 먼저 다가와 주기를 기다린다." },
-            { type: "EI", q: "팀 내부에서 갈등이 발생했을 때, 당신이 소통하는 스타일은?", a: "전화나 대면 미팅을 통해 즉각적이고 직접적인 소통을 선호한다.", b: "생각을 차분히 정리할 수 있는 이메일이나 메신저 등 텍스트 소통을 선호한다." },
-            { type: "EI", q: "업무 공간이나 거주 공간을 선택할 때 더 중요하게 생각하는 요소는?", a: "주변에 사람 활기가 느껴지고 소통이 원활하게 열려있는 공간", b: "외부의 간섭이나 소음이 철저히 차단되는 독립적이고 정적인 공간" },
-            { type: "EI", q: "스스로 생각하기에 당신의 내면 에너지가 외부로 향하는 주기는?", a: "사람들과 자주 교류할 때 활력과 아이디어가 더 솟구친다.", b: "혼자 깊게 몰입하고 집중하는 시간을 가질 때 내면이 충전된다." },
-            { type: "EI", q: "새로운 취미 활동을 시작할 때 당신의 주된 경향성은?", a: "동호회, 소모임 등 다른 사람들과 함께 어울려 즐기는 활동", b: "독서, 공방, 개인 운동 등 철저히 나만의 페이스대로 가는 활동" },
-            { type: "EI", q: "타인들이 당신을 평가할 때 가장 많이 언급하는 특성은?", a: "사교성이 좋고 에너지가 넘치며 적극적인 사람", b: "진중하고 신중하며, 속 깊고 경청을 잘하는 사람" },
-
-            { type: "SN", q: "업무 지시나 보고서를 검토할 때 당신이 가장 신뢰하는 데이터는?", a: "수치, 과거 사례, 실제 통계 등 검증 가능한 구체적인 팩트", b: "전체적인 메가 트렌드, 미래 전망, 데이터 이면의 거시적 맥락" },
-            { type: "SN", q: "새로운 전자기기나 소프트웨어를 처음 사용할 때 당신의 행동 양식은?", a: "제공된 공식 매뉴얼과 핵심 가이드를 순서대로 정독하며 익힌다.", b: "직관적으로 이것저것 먼저 눌러보며 전체 기능을 빠르게 파악한다." },
-            { type: "SN", q: "타인과 대화할 때 당신이 은근히 답답함을 느끼는 순간은?", a: "실현 가능성이 전혀 없는 터무니없는 상상이나 가정만 늘어놓을 때", b: "지나치게 지엽적이고 뻔한 디테일에만 집착해 큰 그림을 보지 못할 때" },
-            { type: "SN", q: "당신이 문제를 해결할 때 주로 의존하는 접근법은?", a: "기존에 성공했던 입증된 매뉴얼과 과거의 경험적 노하우", b: "기존 방식을 탈피한 새로운 아이디어와 혁신적인 돌파구 제시" },
-            { type: "SN", q: "미래의 자산 관리나 투자 계획을 세울 때 당신의 주된 초점은?", a: "현재 자산 현황을 바탕으로 한 안정적이고 예측 가능한 저축/자산 운영", b: "미래의 가치 상승 가능성과 잠재력 중심의 공격적/거시적 포트폴리오 구성" },
-            { type: "SN", q: "소설이나 영화를 감상한 후 당신의 머릿속에 오래 남는 것은?", a: "사건의 치밀한 전개 방식, 대사, 시각적 묘사 등 사실적 디테일", b: "작품이 내포한 상징성, 인간 소외 등 심오한 주제 의식과 여운" },
-            { type: "SN", q: "어떤 대상을 관찰할 때 당신이 무의식적으로 먼저 보는 방향은?", a: "눈앞에 명확하게 존재하는 실체와 '현재' 진행형 사실들", b: "앞으로 일어날 변화의 가능성과 숨겨진 '미래'의 연관성들" },
-            { type: "SN", q: "업무 프레젠테이션을 구성할 때 당신이 공을 들이는 영역은?", a: "빈틈없는 실행 데이터와 일목요연한 예산/일정 정밀 설계", b: "청중의 마음을 움직일 혁신적 비전과 개념적 프레임워크 제안" },
-
-            { type: "TF", q: "동료가 과중한 업무로 실수를 연발하여 팀에 손해를 끼쳤을 때 드는 생각은?", a: "실수가 발생한 프로세스를 원인 규명하고 재발 방지책을 세워야 한다.", b: "동료가 지금 심리적으로 얼마나 압박감을 느끼고 힘들지 걱정된다." },
-            { type: "TF", q: "타인에게 피드백이나 조언을 건넬 때 당신이 지키고자 하는 철칙은?", a: "상황 개선에 실질적 도움을 줄 수 있는 냉정하고 객관적인 진실 전달", b: "상대방의 자존감과 감정이 상하지 않도록 배려한 조심스러운 권유" },
-            { type: "TF", q: "조직 내에서 평가받을 때 당신에게 가장 가치 있는 찬사는?", a: "역량이 매우 탁월하고 논리적이며 일 처리가 완벽하다는 평가", b: "동료들을 깊이 배려하고 조직에 긍정적인 영향력을 준다는 평가" },
-            { type: "TF", q: "인간관계에서 서운함이나 갈등이 유발되었을 때 당신의 대처법은?", a: "무엇이 잘못되었는지 잘잘못과 원인을 이성적으로 짚고 넘어간다.", b: "서로 상처받은 마음을 먼저 달래고 감정적인 앙금을 푸는 데 집중한다." },
-            { type: "TF", q: "의사결정을 내릴 때 가장 경계해야 한다고 생각하는 요소는?", a: "주관적인 감정이나 친분 관계 때문에 공정성을 잃는 것", b: "차가운 논리적 잣대만 들이대다 사람의 가치나 동료애를 저버리는 것" },
-            { type: "TF", q: "친구가 연인과 이별한 뒤 힘들어하며 전화를 걸어왔을 때 당신의 내면 반응은?", a: "왜 헤어지게 되었는지 이별의 근본적인 원인을 객관적으로 짚어보게 된다.", b: "친구의 슬픈 마음에 깊이 감정 이입되어 위로의 말을 찾게 된다." },
-            { type: "TF", q: "당신이 생각하는 올바른 정의(Justice)의 기준은?", a: "누구에게나 예외 없이 공평하게 적용되는 객관적 법과 원칙", b: "개개인의 특별한 사정과 상황을 참작해 주는 인간적인 포용" },
-            { type: "TF", q: "협업 중 아이디어 논쟁이 치열해질 때 당신의 내면 상태는?", a: "아이디어에 대한 비판은 업무일 뿐이므로 개인적 감정은 전혀 상하지 않는다.", b: "논쟁이 과열되면 나를 향한 공격처럼 느껴져 심리적 위축이나 스트레스를 받는다." },
-
-            { type: "JP", q: "새로운 업무나 대규모 과제를 부여받았을 때 당신의 행동 순서는?", a: "세부 마일스톤과 주차별 실행 계획을 세밀히 수립한 후 실행에 착수한다.", b: "일단 기초적인 부분부터 직관적으로 실행해가며 유연하게 일정을 조정한다." },
-            { type: "JP", q: "약속 일정이 잡힌 주말, 만약 돌발적인 변수로 일정이 당일 취소된다면?", a: "미리 짜둔 하루 루틴이 엉망이 된 것 같아 다소 불쾌하거나 당황스럽다.", b: "오히려 자유로운 온전한 개인 시간이 생겨 즐겁고 해방감을 느낀다." },
-            { type: "JP", q: "당신의 업무 데스크나 주거 공간의 정리 정돈 상태는 어떤 편입니까?", a: "물건들이 각각 고유의 지정된 위치에 체계적으로 분류되어 있다.", b: "다소 어수선해 보일 수 있으나 나름대로 필요한 것을 찾는 데 지장 없다." },
-            { type: "JP", q: "장기 여행을 떠나기 전, 당신의 계획 수립 밀도는?", a: "일자별 방문지, 이동 수단, 대안 루트까지 꼼꼼히 확정해 둔다.", b: "목적지와 숙소 등 거점만 정해두고 세부 일정은 현지 기분에 맡긴다." },
-            { type: "JP", q: "마감 시한(Deadline)을 조율하고 엄수하는 당신의 스타일은?", a: "막판 마감 압박을 극도로 싫어해 마감 2~3일 전 완료를 목표로 삼는다.", b: "임박했을 때 나오는 폭발적인 초집중 에너지를 활용해 마감 직전에 끝낸다." },
-            { type: "JP", q: "협업 가이드나 규칙이 명확히 고정되지 않은 유동적인 프로젝트 상황을 마주하면?", a: "체계가 없고 모호하여 비효율적이라 느끼며 스트레스를 받는다.", b: "오히려 규칙에 얽매이지 않고 내 방식대로 자유롭게 헤쳐 나갈 기회라 느낀다." },
-            { type: "JP", q: "당신이 삶을 대할 때 느끼는 안정감의 원천은 무엇입니까?", a: "모든 상황이 명확하게 정리되고 통제 하에 예측 가능하게 흘러갈 때", b: "언제든 새로운 변화나 대안 수용이 가능하도록 선택지가 열려있을 때" },
-            { type: "JP", q: "문서나 폴더 파일을 정리할 때 당신의 디지털 아카이빙 방식은?", a: "대분류-중분류-소분류 등 명확한 네이밍 규칙에 맞게 디렉토리를 상시 정돈한다.", b: "바탕화면에 모아두거나 검색 기능을 활용해 그때그때 필요한 파일을 찾아낸다." }
-        ];
-
-        // 16가지 성격 유형별 전문가 수준의 정밀 해설 리포트 데이터셋
-        const professionalDatabase = {
-            ISTJ: {
-                emoji: "⚖️", title: "철저한 시스템을 구축하는 세상의 소금형",
-                desc: "
+        .section-
